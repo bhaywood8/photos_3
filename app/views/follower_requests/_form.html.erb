@@ -1,7 +1,6 @@
 <% was_validated = follower_request.errors.any? %>
 
 <%= form_with(model: follower_request, local: true, novalidate: true, class: "mb-3") do |f| %>
-  <!-- Label and input for follower_id start -->
   <div class="form-group">
     <% follower_class = "form-control" %>
     <% follower_was_invalid = follower_request.errors.include?(:follower) %>
@@ -15,9 +14,7 @@
     <% end %>
 
     <%= f.label :follower_id %>
-    <!-- Input for follower_id start -->
     <%= f.collection_select :follower_id, User.all, :id, :to_s, {}, class: "form-control" %>
-    <!-- Input for follower_id end -->
     <% if follower_was_invalid %>
       <% follower_request.errors.full_messages_for(:follower).each do |message| %>
         <div class="invalid-feedback d-flex">
@@ -26,8 +23,6 @@
       <% end %>
     <% end %>
   </div>
-  <!-- Label and input for follower_id end -->
-  <!-- Label and input for followed_id start -->
   <div class="form-group">
     <% followed_class = "form-control" %>
     <% followed_was_invalid = follower_request.errors.include?(:followed) %>
@@ -41,9 +36,7 @@
     <% end %>
 
     <%= f.label :followed_id %>
-    <!-- Input for followed_id start -->
     <%= f.collection_select :followed_id, User.all, :id, :to_s, {}, class: "form-control" %>
-    <!-- Input for followed_id end -->
     <% if followed_was_invalid %>
       <% follower_request.errors.full_messages_for(:followed).each do |message| %>
         <div class="invalid-feedback d-flex">
@@ -52,6 +45,5 @@
       <% end %>
     <% end %>
   </div>
-  <!-- Label and input for followed_id end -->
   <%= f.button class: "btn btn-outline-secondary btn-block" %>
 <% end %>

@@ -1,7 +1,6 @@
 <% was_validated = comment.errors.any? %>
 
 <%= form_with(model: comment, local: true, novalidate: true, class: "mb-3") do |f| %>
-  <!-- Label and input for user_id start -->
   <div class="form-group">
     <% user_class = "form-control" %>
     <% user_was_invalid = comment.errors.include?(:user) %>
@@ -15,9 +14,7 @@
     <% end %>
 
     <%= f.label :user_id %>
-    <!-- Input for user_id start -->
     <%= f.collection_select :user_id, User.all, :id, :to_s, {}, class: "form-control" %>
-    <!-- Input for user_id end -->
     <% if user_was_invalid %>
       <% comment.errors.full_messages_for(:user).each do |message| %>
         <div class="invalid-feedback d-flex">
@@ -26,8 +23,6 @@
       <% end %>
     <% end %>
   </div>
-  <!-- Label and input for user_id end -->
-  <!-- Label and input for photo_id start -->
   <div class="form-group">
     <% photo_class = "form-control" %>
     <% photo_was_invalid = comment.errors.include?(:photo) %>
@@ -41,9 +36,7 @@
     <% end %>
 
     <%= f.label :photo_id %>
-    <!-- Input for photo_id start -->
     <%= f.collection_select :photo_id, Photo.all, :id, :to_s, {}, class: "form-control" %>
-    <!-- Input for photo_id end -->
     <% if photo_was_invalid %>
       <% comment.errors.full_messages_for(:photo).each do |message| %>
         <div class="invalid-feedback d-flex">
@@ -52,8 +45,6 @@
       <% end %>
     <% end %>
   </div>
-  <!-- Label and input for photo_id end -->
-  <!-- Label and input for comment_text start -->
   <div class="form-group">
     <% comment_text_class = "form-control" %>
     <% comment_text_was_invalid = comment.errors.include?(:comment_text) %>
@@ -67,9 +58,7 @@
     <% end %>
 
     <%= f.label :comment_text %>
-    <!-- Input for comment_text start -->
     <%= f.text_area :comment_text, class: comment_text_class, placeholder: "Enter comment text" %>
-    <!-- Input for comment_text end -->
     <% if comment_text_was_invalid %>
       <% comment.errors.full_messages_for(:comment_text).each do |message| %>
         <div class="invalid-feedback d-flex">
@@ -78,6 +67,5 @@
       <% end %>
     <% end %>
   </div>
-  <!-- Label and input for comment_text end -->
   <%= f.button class: "btn btn-outline-secondary btn-block" %>
 <% end %>
