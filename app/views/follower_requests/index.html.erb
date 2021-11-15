@@ -34,6 +34,10 @@
       <div class="list-group list-group-flush">
         <%= render collection: @follower_requests, partial: "list_item", as: :follower_request %>
       </div>
+      <div class="card-footer d-flex justify-content-center">
+        <%= paginate @follower_requests, theme: 'twitter-bootstrap-4' %>
+      </div>
+
     </div>
   </div>
 </div>
