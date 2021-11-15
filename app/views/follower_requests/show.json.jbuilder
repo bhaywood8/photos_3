@@ -1,1 +1,2 @@
-json.partial! "follower_requests/follower_request", follower_request: @follower_request
+json.partial! "follower_requests/follower_request",
+              follower_request: @follower_request

@@ -2,10 +2,10 @@ class FollowerRequest < ApplicationRecord
   # Direct associations
 
   belongs_to :followed,
-             :class_name => "User"
+             class_name: "User"
 
   belongs_to :follower,
-             :class_name => "User"
+             class_name: "User"
 
   # Indirect associations
 
@@ -16,5 +16,4 @@ class FollowerRequest < ApplicationRecord
   def to_s
     follower.to_s
   end
-
 end

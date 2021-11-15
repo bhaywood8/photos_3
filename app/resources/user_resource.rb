@@ -28,5 +28,4 @@ class UserResource < ApplicationResource
 
   many_to_many :photo_likes,
                resource: PhotoResource
-
 end

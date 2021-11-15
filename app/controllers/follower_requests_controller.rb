@@ -1,15 +1,15 @@
 class FollowerRequestsController < ApplicationController
-  before_action :set_follower_request, only: [:show, :edit, :update, :destroy]
+  before_action :set_follower_request, only: %i[show edit update destroy]
 
   # GET /follower_requests
   def index
     @q = FollowerRequest.ransack(params[:q])
-    @follower_requests = @q.result(:distinct => true).includes(:follower, :followed).page(params[:page]).per(10)
+    @follower_requests = @q.result(distinct: true).includes(:follower,
+                                                            :followed).page(params[:page]).per(10)
   end
 
   # GET /follower_requests/1
-  def show
-  end
+  def show; end
 
   # GET /follower_requests/new
   def new
@@ -17,17 +17,16 @@ class FollowerRequestsController < ApplicationController
   end
 
   # GET /follower_requests/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /follower_requests
   def create
     @follower_request = FollowerRequest.new(follower_request_params)
 
     if @follower_request.save
-      message = 'FollowerRequest was successfully created.'
-      if Rails.application.routes.recognize_path(request.referrer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
-        redirect_back fallback_location: request.referrer, notice: message
+      message = "FollowerRequest was successfully created."
+      if Rails.application.routes.recognize_path(request.referer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
+        redirect_back fallback_location: request.referer, notice: message
       else
         redirect_to @follower_request, notice: message
       end
@@ -39,7 +38,8 @@ class FollowerRequestsController < ApplicationController
   # PATCH/PUT /follower_requests/1
   def update
     if @follower_request.update(follower_request_params)
-      redirect_to @follower_request, notice: 'Follower request was successfully updated.'
+      redirect_to @follower_request,
+                  notice: "Follower request was successfully updated."
     else
       render :edit
     end
@@ -49,22 +49,22 @@ class FollowerRequestsController < ApplicationController
   def destroy
     @follower_request.destroy
     message = "FollowerRequest was successfully deleted."
-    if Rails.application.routes.recognize_path(request.referrer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
-      redirect_back fallback_location: request.referrer, notice: message
+    if Rails.application.routes.recognize_path(request.referer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
+      redirect_back fallback_location: request.referer, notice: message
     else
       redirect_to follower_requests_url, notice: message
     end
   end
 
-
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_follower_request
-      @follower_request = FollowerRequest.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def follower_request_params
-      params.require(:follower_request).permit(:follower_id, :followed_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_follower_request
+    @follower_request = FollowerRequest.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def follower_request_params
+    params.require(:follower_request).permit(:follower_id, :followed_id)
+  end
 end
