@@ -7,6 +7,9 @@ class FollowerRequestResource < ApplicationResource
 
   # Direct associations
 
+  belongs_to :followed,
+             resource: UserResource
+
   belongs_to :follower,
              resource: UserResource
 
