@@ -8,6 +8,8 @@ class UserResource < ApplicationResource
 
   # Direct associations
 
+  has_many   :photos
+
   has_many   :comments
 
   has_many   :likes
