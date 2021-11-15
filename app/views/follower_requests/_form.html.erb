@@ -1,0 +1,57 @@
+<% was_validated = follower_request.errors.any? %>
+
+<%= form_with(model: follower_request, local: true, novalidate: true, class: "mb-3") do |f| %>
+  <!-- Label and input for follower_id start -->
+  <div class="form-group">
+    <% follower_class = "form-control" %>
+    <% follower_was_invalid = follower_request.errors.include?(:follower) %>
+
+    <% if was_validated %>
+      <% if follower_was_invalid %>
+        <% follower_class << " is-invalid" %>
+      <% else %>
+        <% follower_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :follower_id %>
+    <!-- Input for follower_id start -->
+    <%= f.number_field :follower_id, class: follower_class, placeholder: "Enter follower" %>
+    <!-- Input for follower_id end -->
+    <% if follower_was_invalid %>
+      <% follower_request.errors.full_messages_for(:follower).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <!-- Label and input for follower_id end -->
+  <!-- Label and input for followed_id start -->
+  <div class="form-group">
+    <% followed_class = "form-control" %>
+    <% followed_was_invalid = follower_request.errors.include?(:followed) %>
+
+    <% if was_validated %>
+      <% if followed_was_invalid %>
+        <% followed_class << " is-invalid" %>
+      <% else %>
+        <% followed_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :followed_id %>
+    <!-- Input for followed_id start -->
+    <%= f.number_field :followed_id, class: followed_class, placeholder: "Enter followed" %>
+    <!-- Input for followed_id end -->
+    <% if followed_was_invalid %>
+      <% follower_request.errors.full_messages_for(:followed).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <!-- Label and input for followed_id end -->
+  <%= f.button class: "btn btn-outline-secondary btn-block" %>
+<% end %>

@@ -1,0 +1,46 @@
+<div class="card mb-3">
+  <h2 class="card-header h4">
+    Follower Request #<%= follower_request.id %>
+  </h2>
+
+  <div class="card-body">
+    <dl class="mb-1">
+      <dt>Follower</dt>
+      <!-- Display follower_id start -->
+      <dd><%= follower_request.follower_id %></dd>
+      <!-- Display follower_id end -->
+
+      <dt>Followed</dt>
+      <!-- Display followed_id start -->
+      <dd><%= follower_request.followed_id %></dd>
+      <!-- Display followed_id end -->
+
+    </dl>
+
+    <div class="row">
+      <div class="col">
+        <%= link_to_show_or_back follower_request, '<i class="fas fa-search-plus"></i>'.html_safe, '<i class="fas fa-chevron-left"></i>'.html_safe, class: "btn btn-block btn-outline-secondary" %>
+      </div>
+
+      <!-- Edit link follower_request start -->
+      <div class="col">
+        <%= link_to edit_follower_request_url(follower_request), class: "btn btn-block btn-outline-secondary" do %>
+          <i class="fas fa-edit"></i>
+        <% end %>
+      </div>
+      <!-- Edit link follower_request end -->
+
+      <!-- Delete link follower_request start -->
+      <div class="col">
+        <%= link_to follower_request, method: :delete, data: { confirm: "Do you really want to delete this follower_request?" }, class: "btn btn-block btn-outline-secondary" do %>
+          <i class="fas fa-trash-alt"></i>
+        <% end %>
+      </div>
+      <!-- Delete link follower_request end -->
+    </div>
+  </div>
+
+  <div class="card-footer text-muted">
+    Last updated <%= time_ago_in_words(follower_request.updated_at) %> ago
+  </div>
+</div>
