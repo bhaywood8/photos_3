@@ -24,7 +24,12 @@ class FollowerRequestsController < ApplicationController
     @follower_request = FollowerRequest.new(follower_request_params)
 
     if @follower_request.save
-      redirect_to @follower_request, notice: 'Follower request was successfully created.'
+      message = 'FollowerRequest was successfully created.'
+      if Rails.application.routes.recognize_path(request.referrer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
+        redirect_back fallback_location: request.referrer, notice: message
+      else
+        redirect_to @follower_request, notice: message
+      end
     else
       render :new
     end
