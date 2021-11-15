@@ -42,7 +42,7 @@
 
     <%= f.label :followed_id %>
     <!-- Input for followed_id start -->
-    <%= f.number_field :followed_id, class: followed_class, placeholder: "Enter followed" %>
+    <%= f.collection_select :followed_id, User.all, :id, :to_s, {}, class: "form-control" %>
     <!-- Input for followed_id end -->
     <% if followed_was_invalid %>
       <% follower_request.errors.full_messages_for(:followed).each do |message| %>
