@@ -21,6 +21,10 @@ class User < ApplicationRecord
 
   # Indirect associations
 
+  has_many   :photo_likes,
+             :through => :likes,
+             :source => :photo
+
   # Validations
 
   # Scopes
