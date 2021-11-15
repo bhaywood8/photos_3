@@ -23,4 +23,7 @@ class UserResource < ApplicationResource
 
   # Indirect associations
 
+  many_to_many :photo_likes,
+               resource: PhotoResource
+
 end
